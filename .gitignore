@@ -1,0 +1,4 @@
+packages/
+MVC/obj/
+MVC/bin
+.vs/
