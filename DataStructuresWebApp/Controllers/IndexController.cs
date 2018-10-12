@@ -10,38 +10,36 @@ namespace DataStructuresWebApp.Controllers
 {
     public class IndexController : Controller
     {
-        public MainMenu mainMenu = new MainMenu();
+        public static MainMenu mainMenu = new MainMenu();
         
         // GET: Index
         public ActionResult Index()
         {
-            mainMenu.friends.Add(new Friends() { Name = "bill" });
-            mainMenu.friends.Add(new Friends() { Name = "bill" });
-            mainMenu.friends.Add(new Friends() { Name = "bill" });
-            mainMenu.friends.Add(new Friends() { Name = "bill" });
-            mainMenu.friends.Add(new Friends() { Name = "bill" });
-            mainMenu.friends.Add(new Friends() { Name = "bill" });
+            if (mainMenu.navigations.Count < 1)
+            {
+                mainMenu.navigations.Add(new Navigation() { Name = "Home", ActionMethod = "Index", Controller = "Index" });
+                mainMenu.navigations.Add(new Navigation() { Name = "Stack", ActionMethod = "Index", Controller = "Stack" });
+                mainMenu.navigations.Add(new Navigation() { Name = "Queue", ActionMethod = "Index", Controller = "Queue" });
+                mainMenu.navigations.Add(new Navigation() { Name = "Dictionary", ActionMethod = "Index", Controller = "Dictionary" });
 
-            mainMenu.navigations.Add(new Navigation() { Name = "Stack", ActionMethod = "DeleteName", Controller = "Index" });
-            mainMenu.navigations.Add(new Navigation() { Name = "Exit", ActionMethod = "DeleteName", Controller = "Index" });
-            mainMenu.navigations.Add(new Navigation() { Name = "Queue", ActionMethod = "DeleteName", Controller = "Index" });
-            mainMenu.navigations.Add(new Navigation() { Name = "Kill Bill", ActionMethod = "DeleteName", Controller = "Index" });
+                mainMenu.exit = new Navigation() { Name = "Exit", ActionMethod = "Exit", Controller = "Index" };
+            }
 
-            TempData["Friends"] = mainMenu;
             return View(mainMenu);
         }
 
-        public ActionResult DeleteName()
+        public ActionResult Exit()
         {
-            MainMenu DeleteData = TempData["Friends"] as MainMenu;
-            if (DeleteData.friends.Count > 0)
-            {
-                DeleteData.friends.RemoveAt(DeleteData.friends.Count - 1);
-            }
-            TempData["Friends"] = DeleteData;
 
-            return View("Index", DeleteData);
+            return Redirect("https://www.byu.edu/");
         }
+
+        public ActionResult Return()
+        {
+
+            return View("Index", mainMenu);
+        }
+
 
 
     }

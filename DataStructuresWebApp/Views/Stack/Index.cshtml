@@ -28,7 +28,7 @@
                 <div class="header item">Project Name</div>
                 @foreach (Navigation item in Model.navigations)
                 {
-                    if (item.Name == "Home")
+                    if (item.Name == "Stack")
                     {
                         <a class="active item" href="@Url.Action(item.ActionMethod, item.Controller)">@item.Name</a>
                     }
@@ -37,7 +37,60 @@
                         <a class="item" href="@Url.Action(item.ActionMethod, item.Controller)">@item.Name</a>
                     }
                 }
+                <div class="ui dropdown item">
+                    Stack Actions<i class="dropdown icon"></i>
+                    <div class="menu">
+                         @foreach (Navigation item in Model.actionMethods)
+                       {
+                        <a class="item" href="@Url.Action(item.ActionMethod, item.Controller)">
+                            @item.Name
+                        </a>
+                       }
+                    </div>
+                </div>
                 <a class="right menu item" href="@Url.Action(Model.exit.ActionMethod, Model.exit.Controller)">@Model.exit.Name</a>
+            </div>
+        </div>
+        <div class="tablet mobile only row">
+            <div class="ui borderless huge fluid menu">
+                <a class="header item"> Project Name</a>
+                <div class="right menu">
+                    <a class="menu item">
+                        <div class="ui basic icon toggle button">
+                            <i class="content icon"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="ui vertical accordion borderless fluid menu">
+                <a class="active item"> Home</a><a class="item"> About</a><a class="item"> Contact</a>
+                <div class="item">
+                    <div class="title">
+                        Dropdown<i class="dropdown icon"></i>
+                    </div>
+                    <div class="content">
+                        <div class="item">
+                            Action
+                        </div>
+                        <div class="item">
+                            Another action
+                        </div>
+                        <div class="item">
+                            Something else here
+                        </div>
+                        <div class="ui divider"></div>
+                        <div class="header item">
+                            Navbar header
+                        </div>
+                        <div class="item">
+                            Seperated link
+                        </div>
+                        <div class="item">
+                            One more seperated link
+                        </div>
+                    </div>
+                </div>
+                <div class="ui divider"></div>
             </div>
         </div>
         <div class="row">
@@ -108,4 +161,3 @@
 </body>
 </html>
 
-""
