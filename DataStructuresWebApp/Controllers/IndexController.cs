@@ -1,9 +1,5 @@
 ﻿using DataStructuresWebApp.Models;
 using DataStructuresWebApp.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace DataStructuresWebApp.Controllers
@@ -39,8 +35,5 @@ namespace DataStructuresWebApp.Controllers
 
             return View("Index", mainMenu);
         }
-
-
-
     }
 }

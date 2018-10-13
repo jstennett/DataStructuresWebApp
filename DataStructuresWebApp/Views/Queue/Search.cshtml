@@ -19,11 +19,7 @@
     <link href="../../Content/semantic.min.css" rel="stylesheet" type="text/css" />
     <link href="../../Content/default.css" rel="stylesheet" type="text/css" />
     <link href="../../Content/pandoc-code-highlight.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/se/dt-1.10.18/datatables.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.semanticui.min.css" />
     <script src="../../Scripts/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/se/dt-1.10.18/datatables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.semanticui.min.js"></script>
 </head>
 <body>
     <div class="ui grid container">
@@ -39,7 +35,7 @@
                     else
                     {
                         <a class="item" href="@Url.Action(item.ActionMethod, item.Controller)">@item.Name</a>
-                    }
+                     }
                 }
                 <div class="ui dropdown item">
                     Queue Actions<i class="dropdown icon"></i>
@@ -73,59 +69,49 @@
                         Dropdown<i class="dropdown icon"></i>
                     </div>
                     <div class="content">
-                        <div class="item">
-                            Action
-                        </div>
-                        <div class="item">
-                            Another action
-                        </div>
-                        <div class="item">
-                            Something else here
-                        </div>
-                        <div class="ui divider"></div>
-                        <div class="header item">
-                            Navbar header
-                        </div>
-                        <div class="item">
-                            Seperated link
-                        </div>
-                        <div class="item">
-                            One more seperated link
+                        <div class="menu">
+                            @foreach (Navigation item in Model.actionMethods)
+                            {
+                                <a class="item" href="@Url.Action(item.ActionMethod, item.Controller)">
+                                    @item.Name
+                                </a>
+                            }
                         </div>
                     </div>
                 </div>
                 <div class="ui divider"></div>
             </div>
         </div>
-        @if (Model.message != null)
+
+        @if (Model.searchQueuePersons.Count > 0)
         {
-            <div class="sixteen wide column ui negative message">
-                <div class="header">
-                    There are no more items to delete!
-                </div>
-            </div>
-        }
-        <table id="queueTable" class="ui celled table">
-            <thead>
-                <tr>
-                    <th>Entry #</th>
-                    <th>Name</th>
-                    <th>Age</th>
-                    <th>Location</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (Person item in Model.queuePersons)
-                {
+            <table class="ui celled table">
+                <thead>
+                    <tr>
+                        <th>Entry #</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Person item in Model.searchQueuePersons)
+                    {
                     <tr>
                         <td>@item.newEntry</td>
                         <td>@item.name</td>
                         <td>@item.age</td>
                         <td>@item.location</td>
                     </tr>
-                }
-            </tbody>
-        </table>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <h1 class="ui header">Sorry, Fred was not found</h1>
+        }
+
     </div>
     <script src="../../Scripts/semantic.min.js"></script>
     <style type="text/css">
@@ -180,10 +166,6 @@
             $('.ui.toggle.button').click(function () {
                 $('.ui.vertical.menu').toggle("250", "linear")
             });
-        });
-
-        $(document).ready(function () {
-            $('#queueTable').DataTable();
         });
     </script>
 </body>

@@ -11,13 +11,18 @@ namespace DataStructuresWebApp.Controllers {
 
     public class QueueController : Controller
     {
+        Random random = new Random();
+        PlaceNameGenerator place = new PlaceNameGenerator();
+        PersonNameGenerator person = new PersonNameGenerator();
+
         // GET: Queue
         public ActionResult Index()
         {
+            IndexController.mainMenu.message = null;
             IndexController.mainMenu.actionMethods.Clear();
             IndexController.mainMenu.actionMethods.Add(new Navigation(){ Name = "Add one item to Queue", ActionMethod = "AddOneItemTo", Controller = "Queue" });
             IndexController.mainMenu.actionMethods.Add(new Navigation(){ Name = "Add huge list of items to Queue", ActionMethod = "AddHugeList", Controller = "Queue" });
-            IndexController.mainMenu.actionMethods.Add(new Navigation(){ Name = "Display Queue", ActionMethod = "Display", Controller = "Queue" });
+            IndexController.mainMenu.actionMethods.Add(new Navigation(){ Name = "Display Queue", ActionMethod = "Index", Controller = "Queue" });
             IndexController.mainMenu.actionMethods.Add(new Navigation(){ Name = "Delete from Queue", ActionMethod = "DeleteFrom", Controller = "Queue" });
             IndexController.mainMenu.actionMethods.Add(new Navigation(){ Name = "Clear Queue", ActionMethod = "Clear", Controller = "Queue" });
             IndexController.mainMenu.actionMethods.Add(new Navigation(){ Name = "Search Queue", ActionMethod = "Search", Controller = "Queue" });
@@ -28,6 +33,8 @@ namespace DataStructuresWebApp.Controllers {
 
         public ActionResult AddOneItemTo()
         {
+            IndexController.mainMenu.message = null;
+
             generatePerson();
 
             return View("Index", IndexController.mainMenu);
@@ -35,6 +42,9 @@ namespace DataStructuresWebApp.Controllers {
 
         public ActionResult AddHugeList()
         {
+
+            IndexController.mainMenu.message = null;
+
             IndexController.mainMenu.queuePersons.Clear();
 
             for (int i = 0; i < 2000; i++)
@@ -46,14 +56,25 @@ namespace DataStructuresWebApp.Controllers {
         }
 
        public ActionResult DeleteFrom()
-        {
-            IndexController.mainMenu.queuePersons.Dequeue();
+       {
+            IndexController.mainMenu.message = null;
+
+            if (IndexController.mainMenu.queuePersons.Count > 0)
+            {
+                IndexController.mainMenu.queuePersons.Dequeue();
+            }
+            else
+            {
+                IndexController.mainMenu.message = "There are no more items to delete!";
+            }
 
             return View("Index", IndexController.mainMenu);
-        }
+       }
 
         public ActionResult Clear()
         {
+            IndexController.mainMenu.message = null;
+
             IndexController.mainMenu.queuePersons.Clear();
 
             return View("Index", IndexController.mainMenu);
@@ -61,29 +82,49 @@ namespace DataStructuresWebApp.Controllers {
 
         public ActionResult Search()
         {
-            var search = IndexController.mainMenu.queuePersons.Any(x => x.name == "Phil");
-            if (search)
-            {
+            IndexController.mainMenu.message = null;
 
+            Queue<Person> tempQueue = new Queue<Person>();
+
+            IndexController.mainMenu.searchQueuePersons.Clear();
+
+            foreach (Person item in IndexController.mainMenu.queuePersons)
+            {
+                tempQueue.Enqueue(item);
             }
 
-            return View("Index", IndexController.mainMenu);
+            for (int i = 0; i < IndexController.mainMenu.queuePersons.Count; i++)
+            {
+                if (IndexController.mainMenu.queuePersons.Peek().name.Contains("Fred"))
+                {
+                    IndexController.mainMenu.searchQueuePersons.Enqueue(IndexController.mainMenu.queuePersons.Peek());
+                    IndexController.mainMenu.queuePersons.Clear();
+                }
+                else
+                {
+                    IndexController.mainMenu.queuePersons.Dequeue();
+                }
+            }
+
+            foreach (Person item in tempQueue)
+            {
+                IndexController.mainMenu.queuePersons.Enqueue(item);
+            }
+
+            return View("Search", IndexController.mainMenu);
         }
-
-
 
         public void generatePerson()
         {
-            Random random = new Random();
-            PlaceNameGenerator place = new PlaceNameGenerator();
-            PersonNameGenerator person = new PersonNameGenerator();
+            IndexController.mainMenu.message = null;
+
             IndexController.mainMenu.queuePersons.Enqueue(new Person()
             {
+                newEntry = "New Entry " + (IndexController.mainMenu.queuePersons.Count + 1).ToString(),
                 name = person.GenerateRandomMaleFirstAndLastName(),
-                age = random.Next(100),
+                age = random.Next(1,101),
                 location = place.GenerateRandomPlaceName()
             });
         }
-
     }
 }
