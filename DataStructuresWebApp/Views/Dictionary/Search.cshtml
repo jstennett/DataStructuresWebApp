@@ -28,7 +28,7 @@
                 <div class="header item">Data Structures</div>
                 @foreach (Navigation item in Model.navigations)
                 {
-                    if (item.Name == "Stack")
+                    if (item.Name == "Dictionary")
                     {
                         <a class="active item" href="@Url.Action(item.ActionMethod, item.Controller)">@item.Name</a>
                     }
@@ -38,7 +38,7 @@
                     }
                 }
                 <div class="ui dropdown item">
-                    Stack Actions<i class="dropdown icon"></i>
+                    Dictionary Actions<i class="dropdown icon"></i>
                     <div class="menu">
                         @foreach (Navigation item in Model.actionMethods)
                         {
@@ -82,7 +82,7 @@
                 <div class="ui divider"></div>
             </div>
         </div>
-        @if (Model.searchStackPersons.Count > 0)
+        @if (Model.searchDictionaryPersons.Count > 0)
         {
             <table class="ui celled table">
                 <thead>
@@ -94,10 +94,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (Person item in Model.searchStackPersons)
+                    @foreach (Person item in Model.searchDictionaryPersons.Values)
                     {
                         <tr>
-                            <td>@item.newEntry</td>
+                            <td>@Model.searchDictionaryPersons.FirstOrDefault(x => x.Value.name == item.name && x.Value.location == item.location).Key</td>
                             <td>@item.name</td>
                             <td>@item.age</td>
                             <td>@item.location</td>

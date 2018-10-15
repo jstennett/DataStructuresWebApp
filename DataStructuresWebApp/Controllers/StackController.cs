@@ -20,13 +20,47 @@ namespace DataStructuresWebApp.Controllers
             IndexController.mainMenu.message = null;
             IndexController.mainMenu.actionMethods.Clear();
 
-            IndexController.mainMenu.actionMethods.Add(new Navigation() { Name = "Add one item to Stack", ActionMethod = "AddOneItemTo", Controller = "Stack" });
-            IndexController.mainMenu.actionMethods.Add(new Navigation() { Name = "Add huge list of items to Stack", ActionMethod = "AddHugeList", Controller = "Stack" });
-            IndexController.mainMenu.actionMethods.Add(new Navigation() { Name = "Display Stack", ActionMethod = "Index", Controller = "Stack" });
-            IndexController.mainMenu.actionMethods.Add(new Navigation() { Name = "Delete from Stack", ActionMethod = "DeleteFrom", Controller = "Stack" });
-            IndexController.mainMenu.actionMethods.Add(new Navigation() { Name = "Clear Stack", ActionMethod = "Clear", Controller = "Stack" });
-            IndexController.mainMenu.actionMethods.Add(new Navigation() { Name = "Search Stack", ActionMethod = "Search", Controller = "Stack" });
-            IndexController.mainMenu.actionMethods.Add(new Navigation() { Name = "Return", ActionMethod = "Return", Controller = "Index" });
+            IndexController.mainMenu.actionMethods.Add(new Navigation()
+            {
+                Name = "Add one item to Stack",
+                ActionMethod = "AddOneItemTo",
+                Controller = "Stack"
+            });
+            IndexController.mainMenu.actionMethods.Add(new Navigation()
+            {
+                Name = "Add huge list of items to Stack",
+                ActionMethod = "AddHugeList",
+                Controller = "Stack"
+            });
+            IndexController.mainMenu.actionMethods.Add(new Navigation()
+            {
+                Name = "Display Stack",
+                ActionMethod = "Index",
+                Controller = "Stack"
+            });
+            IndexController.mainMenu.actionMethods.Add(new Navigation()
+            {
+                Name = "Delete from Stack",
+                ActionMethod = "DeleteFrom",
+                Controller = "Stack"
+            });
+            IndexController.mainMenu.actionMethods.Add(new Navigation()
+            {
+                Name = "Clear Stack",
+                ActionMethod = "Clear",
+                Controller = "Stack"
+            });
+            IndexController.mainMenu.actionMethods.Add(new Navigation() {
+                Name = "Search Stack",
+                ActionMethod = "Search",
+                Controller = "Stack"
+            });
+            IndexController.mainMenu.actionMethods.Add(new Navigation()
+            {
+                Name = "Return",
+                ActionMethod = "Return",
+                Controller = "Index"
+            });
 
             return View(IndexController.mainMenu);
         }

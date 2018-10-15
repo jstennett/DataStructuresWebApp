@@ -1,5 +1,4 @@
-﻿
-@using DataStructuresWebApp.Models
+﻿@using DataStructuresWebApp.Models
 @model DataStructuresWebApp.ViewModels.MainMenu
 
 @{
@@ -16,17 +15,21 @@
     <meta content="Semantic-UI, Theme, Design, Template" name="keywords" />
     <meta content="PPType" name="author" />
     <meta content="#ffffff" name="theme-color" />
-    <title>Semantic-UI-Forest, collection of design, themes and templates for Semantic-UI.</title>
+    <title>Data Structures</title>
     <link href="../../Content/semantic.min.css" rel="stylesheet" type="text/css" />
     <link href="../../Content/default.css" rel="stylesheet" type="text/css" />
     <link href="../../Content/pandoc-code-highlight.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/se/dt-1.10.18/datatables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.semanticui.min.css" />
     <script src="../../Scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/se/dt-1.10.18/datatables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.semanticui.min.js"></script>
 </head>
 <body>
     <div class="ui grid container">
         <div class="computer only row">
             <div class="ui borderless huge fluid menu">
-                <div class="header item">Project Name</div>
+                <div class="header item">Data Structures</div>
                 @foreach (Navigation item in Model.navigations)
                 {
                     if (item.Name == "Dictionary")
@@ -41,12 +44,12 @@
                 <div class="ui dropdown item">
                     Dictionary Actions<i class="dropdown icon"></i>
                     <div class="menu">
-                         @foreach (Navigation item in Model.actionMethods)
-                       {
-                        <a class="item" href="@Url.Action(item.ActionMethod, item.Controller)">
-                            @item.Name
-                        </a>
-                       }
+                        @foreach (Navigation item in Model.actionMethods)
+                        {
+                            <a class="item" href="@Url.Action(item.ActionMethod, item.Controller)">
+                                @item.Name
+                            </a>
+                        }
                     </div>
                 </div>
                 <a class="right menu item" href="@Url.Action(Model.exit.ActionMethod, Model.exit.Controller)">@Model.exit.Name</a>
@@ -94,15 +97,35 @@
                 <div class="ui divider"></div>
             </div>
         </div>
-        <div class="row">
-            <div class="ui message">
-                    <h1 class="ui big header">Bagawk!</h1>
-                <p class="lead">
-                    This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.
-                </p>
-                <a class="ui big primary button">View navbar docs &raquo; </a>
+        @if (Model.message != null)
+        {
+            <div class="sixteen wide column ui negative message">
+                <div class="header">
+                    There are no more items to delete!
+                </div>
             </div>
-        </div>
+        }
+        <table id="queueTable" class="ui celled table">
+            <thead>
+                <tr>
+                    <th>Entry #</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Person item in Model.dictionaryPersons.Values)
+                {
+                    <tr>
+                        <td>@Model.dictionaryPersons.FirstOrDefault(x => x.Value.name == item.name && x.Value.location == item.location).Key</td>
+                        <td>@item.name</td>
+                        <td>@item.age</td>
+                        <td>@item.location</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
     <script src="../../Scripts/semantic.min.js"></script>
     <style type="text/css">
@@ -157,6 +180,10 @@
             $('.ui.toggle.button').click(function () {
                 $('.ui.vertical.menu').toggle("250", "linear")
             });
+        });
+
+        $(document).ready(function () {
+            $('#queueTable').DataTable();
         });
     </script>
 </body>

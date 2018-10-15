@@ -15,7 +15,8 @@ namespace DataStructuresWebApp.ViewModels
         public Queue<Person> searchQueuePersons = new Queue<Person>();
         public Stack<Person> stackPersons = new Stack<Person>();
         public Stack<Person> searchStackPersons = new Stack<Person>();
-        public Dictionary<int, Person> dictionaryPersons = new Dictionary<int, Person>();
+        public Dictionary<string, Person> dictionaryPersons = new Dictionary<string, Person>();
+        public Dictionary<string, Person> searchDictionaryPersons = new Dictionary<string, Person>();
         public string message { get; set; }
 
     }

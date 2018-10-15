@@ -13,10 +13,30 @@ namespace DataStructuresWebApp.Controllers
         {
             if (mainMenu.navigations.Count < 1)
             {
-                mainMenu.navigations.Add(new Navigation() { Name = "Home", ActionMethod = "Index", Controller = "Index" });
-                mainMenu.navigations.Add(new Navigation() { Name = "Stack", ActionMethod = "Index", Controller = "Stack" });
-                mainMenu.navigations.Add(new Navigation() { Name = "Queue", ActionMethod = "Index", Controller = "Queue" });
-                mainMenu.navigations.Add(new Navigation() { Name = "Dictionary", ActionMethod = "Index", Controller = "Dictionary" });
+                mainMenu.navigations.Add(new Navigation()
+                {
+                    Name = "Home",
+                    ActionMethod = "Index",
+                    Controller = "Index"
+                });
+                mainMenu.navigations.Add(new Navigation()
+                {
+                    Name = "Stack",
+                    ActionMethod = "Index",
+                    Controller = "Stack"
+                });
+                mainMenu.navigations.Add(new Navigation()
+                {
+                    Name = "Queue",
+                    ActionMethod = "Index",
+                    Controller = "Queue"
+                });
+                mainMenu.navigations.Add(new Navigation()
+                {
+                    Name = "Dictionary",
+                    ActionMethod = "Index",
+                    Controller = "Dictionary"
+                });
 
                 mainMenu.exit = new Navigation() { Name = "Exit", ActionMethod = "Exit", Controller = "Index" };
             }
@@ -26,13 +46,11 @@ namespace DataStructuresWebApp.Controllers
 
         public ActionResult Exit()
         {
-
             return Redirect("https://www.byu.edu/");
         }
 
         public ActionResult Return()
         {
-
             return View("Index", mainMenu);
         }
     }

@@ -20,13 +20,48 @@ namespace DataStructuresWebApp.Controllers {
         {
             IndexController.mainMenu.message = null;
             IndexController.mainMenu.actionMethods.Clear();
-            IndexController.mainMenu.actionMethods.Add(new Navigation(){ Name = "Add one item to Queue", ActionMethod = "AddOneItemTo", Controller = "Queue" });
-            IndexController.mainMenu.actionMethods.Add(new Navigation(){ Name = "Add huge list of items to Queue", ActionMethod = "AddHugeList", Controller = "Queue" });
-            IndexController.mainMenu.actionMethods.Add(new Navigation(){ Name = "Display Queue", ActionMethod = "Index", Controller = "Queue" });
-            IndexController.mainMenu.actionMethods.Add(new Navigation(){ Name = "Delete from Queue", ActionMethod = "DeleteFrom", Controller = "Queue" });
-            IndexController.mainMenu.actionMethods.Add(new Navigation(){ Name = "Clear Queue", ActionMethod = "Clear", Controller = "Queue" });
-            IndexController.mainMenu.actionMethods.Add(new Navigation(){ Name = "Search Queue", ActionMethod = "Search", Controller = "Queue" });
-            IndexController.mainMenu.actionMethods.Add(new Navigation() { Name = "Return", ActionMethod = "Return", Controller = "Index" });
+            IndexController.mainMenu.actionMethods.Add(new Navigation()
+            {
+                Name = "Add one item to Queue",
+                ActionMethod = "AddOneItemTo",
+                Controller = "Queue"
+            });
+            IndexController.mainMenu.actionMethods.Add(new Navigation()
+            {
+                Name = "Add huge list of items to Queue",
+                ActionMethod = "AddHugeList",
+                Controller = "Queue"
+            });
+            IndexController.mainMenu.actionMethods.Add(new Navigation()
+            {
+                Name = "Display Queue",
+                ActionMethod = "Index",
+                Controller = "Queue"
+            });
+            IndexController.mainMenu.actionMethods.Add(new Navigation()
+            {
+                Name = "Delete from Queue",
+                ActionMethod = "DeleteFrom",
+                Controller = "Queue"
+            });
+            IndexController.mainMenu.actionMethods.Add(new Navigation()
+            {
+                Name = "Clear Queue",
+                ActionMethod = "Clear",
+                Controller = "Queue"
+            });
+            IndexController.mainMenu.actionMethods.Add(new Navigation()
+            {
+                Name = "Search Queue",
+                ActionMethod = "Search",
+                Controller = "Queue"
+            });
+            IndexController.mainMenu.actionMethods.Add(new Navigation()
+            {
+                Name = "Return",
+                ActionMethod = "Return",
+                Controller = "Index"
+            });
 
             return View(IndexController.mainMenu);
         }
@@ -42,7 +77,6 @@ namespace DataStructuresWebApp.Controllers {
 
         public ActionResult AddHugeList()
         {
-
             IndexController.mainMenu.message = null;
 
             IndexController.mainMenu.queuePersons.Clear();

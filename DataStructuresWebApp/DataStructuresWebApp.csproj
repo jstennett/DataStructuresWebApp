@@ -280,6 +280,7 @@
     <Content Include="Views\Stack\Index.cshtml" />
     <Content Include="Views\Queue\Search.cshtml" />
     <Content Include="Views\Stack\Search.cshtml" />
+    <Content Include="Views\Dictionary\Search.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
